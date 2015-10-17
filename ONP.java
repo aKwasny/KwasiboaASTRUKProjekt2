@@ -5,16 +5,13 @@ import java.util.*;
  */
 public class ONP {
 
-    static Stack stack = new Stack();
+    public void Oblicz () throws WyjatekPustegoStosu{
 
-    public double suma = 0;
-    public char bierz¹cyZnak;
-
-    public static void main(String[] args) {
-
+        Stack stack = new Stack();
+        double suma = 0;
+        char bierz¹cyZnak;
         String napis = "";
-        String dzia³anie = "";
-        boolean znak = true; //czy znak jest liczb¹
+        Pair a, b;
 
         System.out.println("Proszê podaj ci¹g.");
         Scanner input = new Scanner(System.in);
@@ -22,15 +19,25 @@ public class ONP {
         napis = napis.replaceAll(" ", "");
 
         for (int i = 0; i < napis.length(); i++) {
-            if (napis.charAt(i) == '+') {
-                dzia³anie = String.valueOf('+');
-                znak = false;
-            } else if (napis.charAt(i) == '-') {
-                dzia³anie = String.valueOf('-');
-                znak = false;
-            } else if (napis.charAt(i) == '*') {
-                dzia³anie = String.valueOf('*');
-                znak = false;
+            if (napis.charAt(i) == '+' || napis.charAt(i) == '-' || napis.charAt(i) == '*') {
+                if (stack.isEmpty()) {
+                    throw new WyjatekPustegoStosu("Stos jest pusty. Z³a sk³adania, za ma³o liczb, za du¿o operacji.");
+                } else {
+                    a = stack.get();
+                    b = stack.get();
+                    if (napis.charAt(i) == '+') {
+                        suma = a.getV() + b.getV();
+                    } else if (napis.charAt(i) == '-') {
+                        suma = a.getV() - b.getV();
+                    } else {
+                        suma = a.getV() * b.getV();
+                    }
+                    stack.put(suma);
+                    suma = 0;
+                }
+            } else {
+                double liczba = Double.valueOf(napis.charAt(i));
+                stack.put(liczba);
             }
         }
 
