@@ -1,26 +1,25 @@
-import java.util.*;
-
 /**
  * Created by Andrzej on 2015-10-17.
  */
 public class ONP {
 
     String napis;
-    String[] podzielNapis;
+    String [] podzielonyNapis;
     Stack stack = new Stack();
 
     public ONP (String napis) {
         this.napis = napis;
-        this.podzielNapis = napis.split(" ");
+        this.podzielonyNapis = napis.split(" ");
     }
 
     public double Oblicz () throws WyjatekPustegoStosu{
 
+        double liczba = 0;
         double finalnaLiczba = 0;
         Pair a, b;
 
-        for (int i = 0; i < podzielNapis.length; i++) {
-            String n = podzielNapis[i];
+        for (int i = 0; i < podzielonyNapis.length; i++) {
+            String n = podzielonyNapis[i];
             try {
                 a = stack.get();
                 b = stack.get();
@@ -37,7 +36,7 @@ public class ONP {
                     finalnaLiczba = a.getV() / b.getV();
                     stack.put(finalnaLiczba);
                 } else {
-                    double liczba = Double.parseDouble(napis);
+                    liczba = Double.parseDouble(n);
                     stack.put(liczba);
                 }
             } catch (WyjatekPustegoStosu w) {
