@@ -5,40 +5,50 @@ import java.util.*;
  */
 public class ONP {
 
-    public void Oblicz () throws WyjatekPustegoStosu{
+    String napis;
+    String[] podzielNapis;
+    Stack stack = new Stack();
 
-        Stack stack = new Stack();
+    public ONP (String napis) {
+        this.napis = napis;
+        this.podzielNapis = napis.split(" ");
+    }
+
+    public double Oblicz () throws WyjatekPustegoStosu{
+
         double finalnaLiczba = 0;
-        String bierzacyZnak;
-        String napis = "";
         Pair a, b;
 
-        System.out.println("Proszê podaj ci¹g.");
-        Scanner input = new Scanner(System.in);
-        napis = input.nextLine();
-
-        for (int i = 0; i < napis.length(); i++) {
-            if ((napis.equals('+')) || (napis.equals('-')) || (napis.equals('*')) || (napis.equals(':'))) {
-                if (stack.isEmpty()) {
-                    throw new WyjatekPustegoStosu("Stos jest pusty. Z³a sk³adania, za ma³o liczb, za du¿o operacji.");
+        for (int i = 0; i < podzielNapis.length; i++) {
+            String n = podzielNapis[i];
+            try {
+                a = stack.get();
+                b = stack.get();
+                if (n.equals('+')) {
+                    finalnaLiczba = a.getV() + b.getV();
+                    stack.put(finalnaLiczba);
+                } else if (n.equals('-')) {
+                    finalnaLiczba = a.getV() - b.getV();
+                    stack.put(finalnaLiczba);
+                } else if (n.equals('*') || n.equals(('x'))) {
+                    finalnaLiczba = a.getV() * b.getV();
+                    stack.put(finalnaLiczba);
+                } else if (n.equals(':') || n.equals('/')) {
+                    finalnaLiczba = a.getV() / b.getV();
+                    stack.put(finalnaLiczba);
                 } else {
-                    a = stack.get();
-                    b = stack.get();
-                    if (napis.equals('+')) {
-                        finalnaLiczba = a.getV() + b.getV();
-                    } else if (napis.equals('-')) {
-                        finalnaLiczba = a.getV() - b.getV();
-                    } else if (napis.equals('*')){
-                        finalnaLiczba = a.getV() * b.getV();
-                    } else {
-                        finalnaLiczba = a.getV()/b.getV();
-                    }
+                    double liczba = Double.parseDouble(napis);
+                    stack.put(liczba);
                 }
-            } else {
-                double liczba = Double.valueOf(napis.charAt(i));
-                stack.put(liczba);
+            } catch (WyjatekPustegoStosu w) {
+                System.out.println("Jest znak, ale brak liczb.");
             }
         }
-        System.out.println("Wynik dzia³ania wynosi " + finalnaLiczba + ".");
+        try {
+            return stack.get().getV();
+        } catch (WyjatekPustegoStosu ww) {
+            System.out.println("Brak wyniku.");
+        }
+        return -1;
     }
 }
