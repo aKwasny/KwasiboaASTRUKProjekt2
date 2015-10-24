@@ -9,45 +9,64 @@ public class ONP {
 
     public ONP (String napis) {
         this.napis = napis;
-        this.podzielonyNapis = napis.split(" ");
     }
 
-    public double Oblicz () throws WyjatekPustegoStosu{
+    public ONP () {
+
+    }
+
+    public void setNapis (String napis) {
+        this.napis = napis;
+    }
+
+    public void Oblicz () {
 
         double liczba = 0;
         double finalnaLiczba = 0;
-        Pair a, b;
+        double a, b;
+
+        this.podzielonyNapis = napis.split(" ");
 
         for (int i = 0; i < podzielonyNapis.length; i++) {
             String n = podzielonyNapis[i];
             try {
-                a = stack.get();
-                b = stack.get();
+                a = stack.get().getV();
+                b = stack.get().getV();
                 if (n.equals('+')) {
-                    finalnaLiczba = a.getV() + b.getV();
+                    finalnaLiczba = a + b;
                     stack.put(finalnaLiczba);
                 } else if (n.equals('-')) {
-                    finalnaLiczba = a.getV() - b.getV();
+                    finalnaLiczba = a - b;
                     stack.put(finalnaLiczba);
                 } else if (n.equals('*') || n.equals(('x'))) {
-                    finalnaLiczba = a.getV() * b.getV();
+                    finalnaLiczba = a * b;
                     stack.put(finalnaLiczba);
                 } else if (n.equals(':') || n.equals('/')) {
-                    finalnaLiczba = a.getV() / b.getV();
+                    finalnaLiczba = a / b;
                     stack.put(finalnaLiczba);
                 } else {
+                    try {
                     liczba = Double.parseDouble(n);
                     stack.put(liczba);
+                    } catch (NumberFormatException nexep) {
+                        System.out.println(napis + " = " + "Wpisano niedozwolony znak - istnieje mo¿liwoœæ wpisania tylko liczb i znaków operacji (+, -, *, x, /)");
+                        break;
+                    }
                 }
             } catch (WyjatekPustegoStosu w) {
-                System.out.println("Jest znak, ale brak liczb.");
+                System.out.println(napis + " = " + "ZLA SKLADNIA ZA MAO LICZB ZA DUZO OPERACJI");
             }
         }
         try {
-            return stack.get().getV();
+            System.out.println(napis = " = " + stack.get().getV());
         } catch (WyjatekPustegoStosu ww) {
-            System.out.println("Brak wyniku.");
+            System.out.println("Bleeeeeeeee :P");
         }
-        return -1;
+    }
+
+    public void Oblicz (String napis) {
+        this.napis = napis;
+        this.stack = new Stack();
+        Oblicz();
     }
 }

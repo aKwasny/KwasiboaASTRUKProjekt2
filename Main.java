@@ -6,10 +6,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws WyjatekPustegoStosu {
 
-        System.out.println("Proszê podaj ci¹g.");
-        Scanner input = new Scanner(System.in);
-        String napis = input.nextLine();
-        ONP licz = new ONP(napis);
-        System.out.println(licz.Oblicz());
+        ONP licz = new ONP();
+        licz.Oblicz("2 7 + 3 / 14 3 - 4 * + 2 /");
+        System.out.println(".......................");
+        licz.Oblicz("6 14 * 56 + 23 4 * 78 : - 97 /");
+        System.out.println(".......................");
     }
 }
