@@ -30,26 +30,32 @@ public class ONP {
         for (int i = 0; i < podzielonyNapis.length; i++) {
             String n = podzielonyNapis[i];
             try {
-                a = stack.get().getV();
-                b = stack.get().getV();
                 if (n.equals('+')) {
+                    a = stack.get().getV();
+                    b = stack.get().getV();
                     finalnaLiczba = a + b;
                     stack.put(finalnaLiczba);
                 } else if (n.equals('-')) {
-                    finalnaLiczba = a - b;
+                    a = stack.get().getV();
+                    b = stack.get().getV();
+                    finalnaLiczba = b - a;
                     stack.put(finalnaLiczba);
                 } else if (n.equals('*') || n.equals(('x'))) {
+                    a = stack.get().getV();
+                    b = stack.get().getV();
                     finalnaLiczba = a * b;
                     stack.put(finalnaLiczba);
                 } else if (n.equals(':') || n.equals('/')) {
-                    finalnaLiczba = a / b;
+                    a = stack.get().getV();
+                    b = stack.get().getV();
+                    finalnaLiczba = b / a;
                     stack.put(finalnaLiczba);
                 } else {
                     try {
                     liczba = Double.parseDouble(n);
                     stack.put(liczba);
                     } catch (NumberFormatException nexep) {
-                        System.out.println(napis + " = " + "Wpisano niedozwolony znak - istnieje mo¿liwoœæ wpisania tylko liczb i znaków operacji (+, -, *, x, /)");
+                        System.out.println(napis + " = " + "Wpisano niedozwolony znak - istnieje mo¿liwoœæ wpisania tylko liczb i znaków operacji (+, -, *, x, /, :)");
                         break;
                     }
                 }
