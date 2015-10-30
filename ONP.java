@@ -52,15 +52,14 @@ public class ONP {
                     stack.put(finalnaLiczba);
                 } else {
                     try {
-                    liczba = Double.parseDouble(n);
-                    stack.put(liczba);
-                    } catch (NumberFormatException nexep) {
-                        System.out.println(napis + " = " + "Wpisano niedozwolony znak - istnieje mo¿liwoœæ wpisania tylko liczb i znaków operacji (+, -, *, x, /, :)");
-                        break;
+                        liczba = Double.parseDouble(n);
+                        stack.put(liczba);
+                    } catch (NumberFormatException zlyznak) {
+                        throw new NumberFormatException(liczba + "   =   " + "Wpisano niedozwolony znak - istnieje mo¿liwoœæ wpisania tylko liczb i znaków operacji (+, -, *, x, /, :)");
                     }
                 }
             } catch (WyjatekPustegoStosu w) {
-                System.out.println(napis + " = " + "ZLA SKLADNIA ZA MAO LICZB ZA DUZO OPERACJI");
+                System.out.println(napis + "   -   " + "ZLA SKLADNIA ZA MAO LICZB ZA DUZO OPERACJI");
             }
         }
         try {
