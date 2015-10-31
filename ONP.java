@@ -25,27 +25,27 @@ public class ONP {
         double finalnaLiczba = 0;
         double a, b;
 
-        this.podzielonyNapis = napis.split(" ");
+        this.podzielonyNapis = napis.split(" "); //dzielenie po spacjach i zapisanie do tablicy
 
         for (int i = 0; i < podzielonyNapis.length; i++) {
             String n = podzielonyNapis[i];
             try {
-                if (n.equals('+')) {
+                if (n.equals("+")) {
                     a = stack.get().getV();
                     b = stack.get().getV();
                     finalnaLiczba = a + b;
                     stack.put(finalnaLiczba);
-                } else if (n.equals('-')) {
+                } else if (n.equals("-")) {
                     a = stack.get().getV();
                     b = stack.get().getV();
                     finalnaLiczba = b - a;
                     stack.put(finalnaLiczba);
-                } else if (n.equals('*') || n.equals(('x'))) {
+                } else if (n.equals("*") || n.equals(("x"))) {
                     a = stack.get().getV();
                     b = stack.get().getV();
                     finalnaLiczba = a * b;
                     stack.put(finalnaLiczba);
-                } else if (n.equals(':') || n.equals('/')) {
+                } else if (n.equals(":") || n.equals("/")) {
                     a = stack.get().getV();
                     b = stack.get().getV();
                     finalnaLiczba = b / a;
@@ -55,7 +55,7 @@ public class ONP {
                         liczba = Double.parseDouble(n);
                         stack.put(liczba);
                     } catch (NumberFormatException zlyznak) {
-                        throw new NumberFormatException(liczba + "   =   " + "Wpisano niedozwolony znak - istnieje mo¿liwoœæ wpisania tylko liczb i znaków operacji (+, -, *, x, /, :)");
+                        System.out.println(liczba + "   =   " + "Wpisano niedozwolony znak - istnieje mo¿liwoœæ wpisania tylko liczb i znaków operacji (+, -, *, x, /, :)");
                     }
                 }
             } catch (WyjatekPustegoStosu w) {
@@ -65,7 +65,7 @@ public class ONP {
         try {
             System.out.println(napis = " = " + stack.get().getV());
         } catch (WyjatekPustegoStosu ww) {
-            System.out.println("Bleeeeeeeee :P");
+            System.out.println("Stos pusty");
         }
     }
 
